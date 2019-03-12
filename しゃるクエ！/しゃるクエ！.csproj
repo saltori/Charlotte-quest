@@ -224,15 +224,7 @@
     <Compile Include="Assets\スクリプト\CommandMenu\commandMenu.cs" />
     <Compile Include="Assets\スクリプト\CommandMenu\commandMenuButton.cs" />
     <Compile Include="Assets\スクリプト\invisible.cs" />
-    <Compile Include="Assets\スクリプト\Manager\AudioManager.cs" />
-    <Compile Include="Assets\スクリプト\Manager\BGM.cs" />
-    <Compile Include="Assets\スクリプト\Manager\CanvasFader.cs" />
-    <Compile Include="Assets\スクリプト\Manager\SceneNavigator.cs" />
-    <Compile Include="Assets\スクリプト\Manager\SingletonMonoBehaviour.cs" />
     <Compile Include="Assets\スクリプト\menu.cs" />
-    <Compile Include="Assets\スクリプト\Menu\invisible.cs" />
-    <Compile Include="Assets\スクリプト\Menu\menu.cs" />
-    <Compile Include="Assets\スクリプト\Menu\menuButton.cs" />
     <Compile Include="Assets\スクリプト\menuButton.cs" />
     <Compile Include="Assets\スクリプト\move.cs" />
     <Compile Include="Assets\スクリプト\sample.cs" />
