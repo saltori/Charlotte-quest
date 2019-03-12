@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class title : MonoBehaviour {
-
-    Image image;
-    int FlashingCnt;
+public class commandInvisible : MonoBehaviour {
+    public bool actFlag;
+    public Image image;
 
     Color color1 = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+    //  透明にする
     Color color2 = new Color(1.0f, 1.0f, 1.0f, 0.0f);
 
     // Use this for initialization
     void Start () {
-        FlashingCnt = 0;
         image = GetComponent<Image>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        FlashingCnt++;
-        if (FlashingCnt / 30 % 2 == 0)
+         actFlag = commandMenu.flag;
+       if (actFlag)
         {
             image.color = color1;
         }
@@ -28,10 +27,5 @@ public class title : MonoBehaviour {
         {
             image.color = color2;
         }
-		if(Input.GetMouseButtonDown(0))
-        {
-            AudioManager.Instance.PlaySE("決定音1");
-            SceneNavigator.Instance.Change("ホーム");
-        }
-	}
+    }
 }
