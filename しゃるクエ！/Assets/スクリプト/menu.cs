@@ -7,12 +7,13 @@ public class menu : MonoBehaviour
 {
 
     public bool actFlag;
-    public static bool flag = false;
+    public static bool flag;
 
     // Use this for initialization
     void Start()
     {
-        actFlag = false;
+        actFlag = true;
+        flag = true;
     }
 
     // Update is called once per frame
