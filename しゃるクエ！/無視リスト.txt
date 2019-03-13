@@ -8,6 +8,4 @@ obj
 
 Packages
 
-Temp
-
-Assembly-CSharp
+Assembly-CSharp.csproj
