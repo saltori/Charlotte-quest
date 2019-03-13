@@ -1,0 +1,13 @@
+.vs
+
+Library
+
+Logs
+
+obj
+
+Packages
+
+Temp
+
+Assembly-CSharp
