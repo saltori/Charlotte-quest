@@ -179,14 +179,3 @@ tall = タテ型のゲーム
 ④[playse storage=〇〇]で効果音
 
 ⑤[stopse]で効果音停止
-
-
-♦♦♦♦　Q.一体どうやってJOKERを呼び出せばいいんだ！！！！♦♦♦♦
-
-①JOKER→アクションシーンは[scene file=〇〇]で可ただし移動元のシーンがBuildSetting で登録されていること
-
-②アクションシーン→JOKER
-
-まずusing Novelを宣言しておく
-
-そしてNovelSingleton.StatusManager.callJoker(呼び出したいシナリオファイル名,シナリオのターゲット名（シナリオの最初からの場合は空白を指定）);
