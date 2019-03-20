@@ -30,7 +30,7 @@ public class title : MonoBehaviour {
         }
 		if(Input.GetMouseButtonDown(0))
         {
-            AudioManager.Instance.PlaySE("決定音1");
+            AudioManager.Instance.PlaySE("タイトルから進む時");
             SceneNavigator.Instance.Change("ホーム");
         }
 	}
