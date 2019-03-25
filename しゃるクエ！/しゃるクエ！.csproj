@@ -290,12 +290,12 @@
     <Compile Include="Assets\スクリプト\sample.cs" />
     <Compile Include="Assets\スクリプト\Scene.cs" />
     <Compile Include="Assets\スクリプト\title.cs" />
+    <Compile Include="Assets\スクリプト\titleLogo.cs" />
     <Compile Include="Assets\テスト用スクリプト\home.cs" />
     <Compile Include="Assets\テスト用スクリプト\map.cs" />
     <Compile Include="Assets\テスト用スクリプト\SEtest.cs" />
     <Compile Include="Assets\テスト用スクリプト\textManager.cs" />
     <Compile Include="Assets\テスト用スクリプト\textTest.cs" />
-    <Compile Include="Assets\テスト用スクリプト\titleLogo.cs" />
     <Compile Include="Assets\マネージャー系\AudioManager.cs" />
     <Compile Include="Assets\マネージャー系\CanvasFader.cs" />
     <Compile Include="Assets\マネージャー系\SceneNavigator.cs" />
