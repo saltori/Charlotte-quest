@@ -86,10 +86,7 @@ namespace Novel
 
             NovelSingleton.GameManager.globalSetting = sobj;
             string json = LitJson.JsonMapper.ToJson(sobj);
-        
-
-			//WebPlayer の場合保存方法に変化を入れる
-			 else {
+       
 
                 string path = storagePath + "/setting.dat";
 
@@ -108,13 +105,9 @@ namespace Novel
                 sw.Flush();
                 sw.Close();
                 fs.Close();
-             }
         }
     
         public void loadGlobal() {
-
-			//WebPlayer の場合保存方法に変化を入れる
-			else {
 
 
                 string path = storagePath + "/setting.dat";
@@ -137,8 +130,6 @@ namespace Novel
                 fs.Close();
 
                 NovelSingleton.GameManager.globalSetting = obj;
-
-            }
 
             //グローバル変数を格納する
             StatusManager.variable.replaceAll("global", NovelSingleton.GameManager.globalSetting.globalVar);
@@ -210,9 +201,6 @@ namespace Novel
 
             string json = LitJson.JsonMapper.ToJson(obj);
 
-			//WebPlayer の場合保存方法に変化を入れる
-			else {
-
 
                 if (!Directory.Exists(storagePath))
                 {
@@ -228,15 +216,10 @@ namespace Novel
                 sw.Flush();
                 sw.Close();
                 fs.Close();
-
-            }
         }
 
         public object LoadFromBinaryFile(string path)
         {
-
-			//WebPlayer の場合保存方法に変化を入れる
-			else {
 
                 if (!File.Exists(path)) {
                     return null;
@@ -259,8 +242,6 @@ namespace Novel
                 fs.Close();
 
                 return obj;
-
-            }
 
 
         }
