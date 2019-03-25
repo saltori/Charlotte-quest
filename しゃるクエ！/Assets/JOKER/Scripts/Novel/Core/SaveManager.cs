@@ -14,323 +14,296 @@ using System.Text;
 namespace Novel
 {
 
-	//ゲーム全体に関する情報を保持する
-	[Serializable]
-	public class SaveGlobalObject{
+    //ゲーム全体に関する情報を保持する
+    [Serializable]
+    public class SaveGlobalObject {
 
-		//global変数を保持する。ゲームごとに変わらない変数 global.x みたいなやつ
-		public Dictionary<string,string> globalVar = new Dictionary<string,string>() ;
-
-
-	}
+        //global変数を保持する。ゲームごとに変わらない変数 global.x みたいなやつ
+        public Dictionary<string, string> globalVar = new Dictionary<string, string>();
 
 
-	[Serializable]
-	public class SaveObject{
-
-		public string currentFile ="";
-		public int  currentIndex =-1;
-
-		public string name ="";
-		public string title ="";
-		public string description ="";
-		public string date = "";
-		public string currentMessage ="";
-
-		public bool visibleMessageFrame = true;
-		public bool enableNextOrder =true;
-		public bool enableEventClick = true;
-		public bool enableClickOrder = true;
-		public string currentPlayBgm = "";
-
-		public bool isEventStop = false;
-
-		//画面のキャプチャ情報
-		public string cap_img_file ="";
-
-		//ImageManager 編
-		//dicImage
-		public Dictionary <string,Image> dicImage ;
-		//dicTab 
-		public Dictionary<string,Dictionary<string,Image>> dicTag ;
-
-		//イベント管理用
-		public Dictionary<string,EventObject> dicEvent ; 
-
-		//スタック管理
-		public ScenarioManager scenarioManager;
-
-		public LogManager logManager;
-
-		//変数管理　
-		public Variable variable;
+    }
 
 
-	}
+    [Serializable]
+    public class SaveObject {
 
-	public class SaveManager
-	{
+        public string currentFile = "";
+        public int currentIndex = -1;
 
-		private string storagePath ;
+        public string name = "";
+        public string title = "";
+        public string description = "";
+        public string date = "";
+        public string currentMessage = "";
+
+        public bool visibleMessageFrame = true;
+        public bool enableNextOrder = true;
+        public bool enableEventClick = true;
+        public bool enableClickOrder = true;
+        public string currentPlayBgm = "";
+
+        public bool isEventStop = false;
+
+        //画面のキャプチャ情報
+        public string cap_img_file = "";
+
+        //ImageManager 編
+        //dicImage
+        public Dictionary<string, Image> dicImage;
+        //dicTab 
+        public Dictionary<string, Dictionary<string, Image>> dicTag;
+
+        //イベント管理用
+        public Dictionary<string, EventObject> dicEvent;
+
+        //スタック管理
+        public ScenarioManager scenarioManager;
+
+        public LogManager logManager;
+
+        //変数管理　
+        public Variable variable;
 
 
-		public SaveManager ()
-		{
+    }
 
-			this.storagePath = Application.persistentDataPath + "/novel";
+    public class SaveManager
+    {
 
-		}
-
-		//グローバルセッティングを保存します
-		public void saveGlobal(SaveGlobalObject sobj){
-
-			NovelSingleton.GameManager.globalSetting = sobj;
-			string json = LitJson.JsonMapper.ToJson (sobj);
+        private string storagePath;
 
 
-			//WebPlayer の場合保存方法に変化を入れる
-			if (Application.platform == RuntimePlatform.WindowsWebPlayer || Application.platform == RuntimePlatform.OSXWebPlayer) {
+        public SaveManager()
+        {
 
-				PlayerPrefs.SetString("setting.dat", json);
+            this.storagePath = Application.persistentDataPath + "/novel";
 
-			} else {
+        }
 
-				string path = storagePath + "/setting.dat";
+        //グローバルセッティングを保存します
+        public void saveGlobal(SaveGlobalObject sobj) {
 
-				//ディレクトリ存在チェック
-				if (!Directory.Exists (storagePath)) {
-					Directory.CreateDirectory (storagePath);
-				}
-
-
-				FileStream fs = new FileStream (path,
-					               FileMode.Create,
-					               FileAccess.Write);
-
-				StreamWriter sw = new StreamWriter (fs);
-				sw.Write (json);
-				sw.Flush ();
-				sw.Close ();
-				fs.Close ();
-			}
-		}
-
-		public void loadGlobal(){
+            NovelSingleton.GameManager.globalSetting = sobj;
+            string json = LitJson.JsonMapper.ToJson(sobj);
+        
 
 			//WebPlayer の場合保存方法に変化を入れる
-			if (Application.platform == RuntimePlatform.WindowsWebPlayer || Application.platform == RuntimePlatform.OSXWebPlayer) {
+			 else {
 
-				if (!PlayerPrefs.HasKey ("setting.dat")) {
-					this.saveGlobal (new SaveGlobalObject ());
-				}
+                string path = storagePath + "/setting.dat";
 
-				string json = PlayerPrefs.GetString ("setting.dat");
-
-				SaveGlobalObject obj = LitJson.JsonMapper.ToObject<SaveGlobalObject> (json);
-				NovelSingleton.GameManager.globalSetting = obj;
+                //ディレクトリ存在チェック
+                if (!Directory.Exists(storagePath)) {
+                    Directory.CreateDirectory(storagePath);
+                }
 
 
-			} else {
+                FileStream fs = new FileStream(path,
+                                   FileMode.Create,
+                                   FileAccess.Write);
 
-
-				string path = storagePath + "/setting.dat";
-
-				if (!File.Exists (path)) {
-					//ファイル作製
-					this.saveGlobal (new SaveGlobalObject ());
-				}
-
-				FileStream fs = new FileStream (path,
-					               FileMode.Open,
-					               FileAccess.Read);
-
-				StreamReader sr = new StreamReader (path, System.Text.Encoding.Default);
-				string json = sr.ReadToEnd ();
-
-				SaveGlobalObject obj = LitJson.JsonMapper.ToObject<SaveGlobalObject> (json);
-
-				sr.Close ();
-				fs.Close ();
-
-				NovelSingleton.GameManager.globalSetting = obj;
-
-			}
-
-			//グローバル変数を格納する
-			StatusManager.variable.replaceAll("global",NovelSingleton.GameManager.globalSetting.globalVar);
-
-			StatusManager.variable.trace ("global");
-
-		}
-
-		//一時退避しておいたスナップから保存を実行する
-		public void saveFromSnap(string name){
-		
-			//一時領域からデータ取得
-			string path = storagePath + "/savesnap.sav";
-			object obj = LoadFromBinaryFile (path);
-			if (obj == null) {
-			
-			} else {
-				SaveObject sobj = (SaveObject)LoadFromBinaryFile (path);
-				string w_path = storagePath + "/"+name+".sav";
-				SaveToBinaryFile(sobj, w_path);
-			}
-
-		}
-
-		//plus が true の場合は、一つ進めたところをロードさせる。sleepgameの後とか戻ってきた時用
-		public void save(string save_name,bool plus =false){
-
-			SaveObject sobj = new SaveObject ();
-			sobj.name = save_name;
-			//タイトルとか、基本情報を格納
-			sobj.title = NovelSingleton.GameManager.scene.messageForSaveTitle;
-			sobj.date = DateTime.Now.ToString ("yyyy/MM/dd HH:mm:ss");
-			sobj.currentMessage = NovelSingleton.GameManager.scene.messageForSaveTitle;
-
-			sobj.dicImage = NovelSingleton.GameManager.imageManager.dicImage;
-			sobj.dicTag   = NovelSingleton.GameManager.imageManager.dicTag;
-			sobj.dicEvent = NovelSingleton.GameManager.eventManager.dicEvent;
-			sobj.scenarioManager = NovelSingleton.GameManager.scenarioManager;
-			sobj.variable = StatusManager.variable;
-			sobj.currentFile = StatusManager.currentScenario;
-			sobj.currentIndex = NovelSingleton.GameManager.CurrentComponentIndex;
-			sobj.logManager = NovelSingleton.GameManager.logManager;
-
-			//ステータス
-			sobj.visibleMessageFrame = StatusManager.visibleMessageFrame;
-			sobj.enableNextOrder = StatusManager.enableNextOrder;
-			sobj.enableEventClick = StatusManager.enableEventClick;
-			sobj.enableClickOrder = StatusManager.enableClickOrder;
-			sobj.currentPlayBgm = StatusManager.currentPlayBgm;
-			sobj.isEventStop = StatusManager.isEventStop;
-
-			//画面のキャプチャを作成して保存する
-			//保存先のパス
-
-			if (plus == true) {
-				sobj.currentIndex++;
-			}
-
-			//sobjをシリアライズ化して保存 
-
-			string path = storagePath + "/"+save_name+".sav";
-
-			SaveToBinaryFile(sobj, path);
-
-		}
-
-		public void SaveToBinaryFile(SaveObject obj, string path)
-		{
-
-			string json = LitJson.JsonMapper.ToJson (obj);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write(json);
+                sw.Flush();
+                sw.Close();
+                fs.Close();
+             }
+        }
+    
+        public void loadGlobal() {
 
 			//WebPlayer の場合保存方法に変化を入れる
-			if (Application.platform == RuntimePlatform.WindowsWebPlayer || Application.platform == RuntimePlatform.OSXWebPlayer) {
-
-				PlayerPrefs.SetString(path, json);
-
-			} else {
+			else {
 
 
-				if (!Directory.Exists(storagePath))
-				{
-					Directory.CreateDirectory(storagePath);
-				}
+                string path = storagePath + "/setting.dat";
 
-				FileStream fs = new FileStream(path,
-					FileMode.Create,
-					FileAccess.Write);
+                if (!File.Exists(path)) {
+                    //ファイル作製
+                    this.saveGlobal(new SaveGlobalObject());
+                }
 
-				StreamWriter sw = new StreamWriter(fs);
-				sw.Write(json);
-				sw.Flush ();
-				sw.Close ();
-				fs.Close();
+                FileStream fs = new FileStream(path,
+                                   FileMode.Open,
+                                   FileAccess.Read);
 
-			}
-		}
+                StreamReader sr = new StreamReader(path, System.Text.Encoding.Default);
+                string json = sr.ReadToEnd();
 
-		public object LoadFromBinaryFile(string path)
-		{
+                SaveGlobalObject obj = LitJson.JsonMapper.ToObject<SaveGlobalObject>(json);
+
+                sr.Close();
+                fs.Close();
+
+                NovelSingleton.GameManager.globalSetting = obj;
+
+            }
+
+            //グローバル変数を格納する
+            StatusManager.variable.replaceAll("global", NovelSingleton.GameManager.globalSetting.globalVar);
+
+            StatusManager.variable.trace("global");
+
+        }
+
+        //一時退避しておいたスナップから保存を実行する
+        public void saveFromSnap(string name) {
+
+            //一時領域からデータ取得
+            string path = storagePath + "/savesnap.sav";
+            object obj = LoadFromBinaryFile(path);
+            if (obj == null) {
+
+            } else {
+                SaveObject sobj = (SaveObject)LoadFromBinaryFile(path);
+                string w_path = storagePath + "/" + name + ".sav";
+                SaveToBinaryFile(sobj, w_path);
+            }
+
+        }
+
+        //plus が true の場合は、一つ進めたところをロードさせる。sleepgameの後とか戻ってきた時用
+        public void save(string save_name, bool plus = false) {
+
+            SaveObject sobj = new SaveObject();
+            sobj.name = save_name;
+            //タイトルとか、基本情報を格納
+            sobj.title = NovelSingleton.GameManager.scene.messageForSaveTitle;
+            sobj.date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            sobj.currentMessage = NovelSingleton.GameManager.scene.messageForSaveTitle;
+
+            sobj.dicImage = NovelSingleton.GameManager.imageManager.dicImage;
+            sobj.dicTag = NovelSingleton.GameManager.imageManager.dicTag;
+            sobj.dicEvent = NovelSingleton.GameManager.eventManager.dicEvent;
+            sobj.scenarioManager = NovelSingleton.GameManager.scenarioManager;
+            sobj.variable = StatusManager.variable;
+            sobj.currentFile = StatusManager.currentScenario;
+            sobj.currentIndex = NovelSingleton.GameManager.CurrentComponentIndex;
+            sobj.logManager = NovelSingleton.GameManager.logManager;
+
+            //ステータス
+            sobj.visibleMessageFrame = StatusManager.visibleMessageFrame;
+            sobj.enableNextOrder = StatusManager.enableNextOrder;
+            sobj.enableEventClick = StatusManager.enableEventClick;
+            sobj.enableClickOrder = StatusManager.enableClickOrder;
+            sobj.currentPlayBgm = StatusManager.currentPlayBgm;
+            sobj.isEventStop = StatusManager.isEventStop;
+
+            //画面のキャプチャを作成して保存する
+            //保存先のパス
+
+            if (plus == true) {
+                sobj.currentIndex++;
+            }
+
+            //sobjをシリアライズ化して保存 
+
+            string path = storagePath + "/" + save_name + ".sav";
+
+            SaveToBinaryFile(sobj, path);
+
+        }
+
+        public void SaveToBinaryFile(SaveObject obj, string path)
+        {
+
+            string json = LitJson.JsonMapper.ToJson(obj);
 
 			//WebPlayer の場合保存方法に変化を入れる
-			if (Application.platform == RuntimePlatform.WindowsWebPlayer || Application.platform == RuntimePlatform.OSXWebPlayer) {
-
-				string json = PlayerPrefs.GetString (path);
-				SaveObject obj = LitJson.JsonMapper.ToObject<SaveObject> (json);
-
-				return obj;
-
-			} else {
-
-				if (!File.Exists (path)) {
-					return null;
-				}
-
-				FileStream fs = new FileStream (path,
-					               FileMode.Open,
-					               FileAccess.Read);
-
-				StreamReader sr = new StreamReader (path, System.Text.Encoding.Default);
-				string json = sr.ReadToEnd ();
-
-				if (json == "") {
-					return null;
-				}
-
-				SaveObject obj = LitJson.JsonMapper.ToObject<SaveObject> (json);
-
-				sr.Close ();
-				fs.Close ();
-
-				return obj;
-
-			}
+			else {
 
 
-		}
+                if (!Directory.Exists(storagePath))
+                {
+                    Directory.CreateDirectory(storagePath);
+                }
 
-		public SaveObject getSaveData(string data_name){
-		
-			string path = storagePath + "/"+data_name+".sav";
+                FileStream fs = new FileStream(path,
+                    FileMode.Create,
+                    FileAccess.Write);
 
-			SaveObject obj = (SaveObject)LoadFromBinaryFile (path);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write(json);
+                sw.Flush();
+                sw.Close();
+                fs.Close();
 
-			return obj;
-		
-		}
+            }
+        }
 
-		public void applySaveVariable(string save_name, string var_name="save"){
+        public object LoadFromBinaryFile(string path)
+        {
 
-			//最初のセーブデータを取得するか。
-			SaveObject sobj =  NovelSingleton.SaveManager.getSaveData(save_name);
-			//this.gameManager.saveManager.getSaveData ("save_"+current_index);
-			StatusManager.variable.set (var_name+".name", save_name);
+			//WebPlayer の場合保存方法に変化を入れる
+			else {
 
-			if (sobj != null) {
+                if (!File.Exists(path)) {
+                    return null;
+                }
 
-				StatusManager.variable.set (var_name+".title", sobj.title);
-				StatusManager.variable.set (var_name+".date", sobj.date);
-				StatusManager.variable.set (var_name+".description", sobj.description);
-				StatusManager.variable.set (var_name+".name", save_name);
-				//StatusManager.variable.set ("save.img", sobj.cap_img_file);
+                FileStream fs = new FileStream(path,
+                                   FileMode.Open,
+                                   FileAccess.Read);
 
-			} else {
+                StreamReader sr = new StreamReader(path, System.Text.Encoding.Default);
+                string json = sr.ReadToEnd();
 
-				StatusManager.variable.set (var_name+".title", "データがありません");
-				StatusManager.variable.set (var_name+".date", "" );
-				StatusManager.variable.set (var_name+".description", "");
-				StatusManager.variable.set (var_name+".name", save_name);
-				//StatusManager.variable.set ("save.img", "");
+                if (json == "") {
+                    return null;
+                }
 
-			}
+                SaveObject obj = LitJson.JsonMapper.ToObject<SaveObject>(json);
+
+                sr.Close();
+                fs.Close();
+
+                return obj;
+
+            }
 
 
-		}
+        }
 
-		/*		
+        public SaveObject getSaveData(string data_name) {
+
+            string path = storagePath + "/" + data_name + ".sav";
+
+            SaveObject obj = (SaveObject)LoadFromBinaryFile(path);
+
+            return obj;
+
+        }
+
+        public void applySaveVariable(string save_name, string var_name = "save") {
+
+            //最初のセーブデータを取得するか。
+            SaveObject sobj = NovelSingleton.SaveManager.getSaveData(save_name);
+            //this.gameManager.saveManager.getSaveData ("save_"+current_index);
+            StatusManager.variable.set(var_name + ".name", save_name);
+
+            if (sobj != null) {
+
+                StatusManager.variable.set(var_name + ".title", sobj.title);
+                StatusManager.variable.set(var_name + ".date", sobj.date);
+                StatusManager.variable.set(var_name + ".description", sobj.description);
+                StatusManager.variable.set(var_name + ".name", save_name);
+                //StatusManager.variable.set ("save.img", sobj.cap_img_file);
+
+            } else {
+
+                StatusManager.variable.set(var_name + ".title", "データがありません");
+                StatusManager.variable.set(var_name + ".date", "");
+                StatusManager.variable.set(var_name + ".description", "");
+                StatusManager.variable.set(var_name + ".name", save_name);
+                //StatusManager.variable.set ("save.img", "");
+
+            }
+
+
+        }
+
+        /*		
 
 		public string Base64FromStringComp(string st)
 		{
@@ -402,6 +375,6 @@ namespace Novel
 		}
 		*/
 
-	}
+    }
 
 }
