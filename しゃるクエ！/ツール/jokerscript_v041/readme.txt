@@ -160,6 +160,8 @@ tall = タテ型のゲーム
 ②キャラクターの宣言をする
 [chara_new name=yuko storage=名前 scale="大きさの倍率(無くても良い)"jname = ディスプレイ名 jcolor="色コード"]
 
+scale_xにマイナスの値をマイナスにすると反転できる
+
 [chara_new]の時に jname　というパラメータにキャラクター名 
 そして、jcolorに色を設定しておくと 
 シナリオ中にシャープを先頭につけてname属性を指定することで

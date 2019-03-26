@@ -310,6 +310,7 @@
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\scene1.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\system.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\title.txt" />
+    <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\before vsTurner.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\libs\menu.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\libs\save.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\libs\utils.txt" />
