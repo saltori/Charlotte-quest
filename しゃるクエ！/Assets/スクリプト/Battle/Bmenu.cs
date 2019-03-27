@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class menu : MonoBehaviour
+public class Bmenu : MonoBehaviour
 {
 
     public bool actFlag;
