@@ -1,3 +1,56 @@
+<<<<<<< HEAD
+﻿;チュートリアル用スクリプトファイル
+
+;メッセージ表示
+[showmessage]
+
+;共通ライブラリ
+;セーブ・ロードバックログなど基本的な機能を取り込む 
+;[call file=wide/system target="*system_setting_buttons"]
+
+;ゲーム作成で便利なマクロ集
+[call file=wide/libs/utils]
+[text_new name=_sp_chara_name layer=ui x="-168" y=-108.5 val="" color="DDFF00" fontsize=16 anchor="MiddleLeft"]
+[text_show name="_sp_chara_name"]
+
+[wait time=2]
+[chara_new name="シャルロット" storage="シャルロット" jname = "シャルロット" x=3]
+
+[chara_new name="カーラ" storage="カーラ" jname = "カーラ" x=-3 scale_x=-1]
+
+[show name = "シャルロット"]
+
+#シャルロット
+さあついたわよカーラ！[p]
+
+
+[show name = "カーラ"]
+#カーラ
+ほ、ほんとに行くの……？[p]
+
+#シャルロット
+あったりまえよ！[p]
+私の事をおばさん呼ばわりしたクソガキを遺跡のお宝で見返してやるんだから！[p]
+
+#カーラ
+私はシャルちゃん凄いかっこいいしかわいいと思うけどなぁ。[p]
+
+#シャルロット
+ほめても何も出ないわよカーラ。[p]
+それにあたしは決めたの。[p]
+どこかの遺跡にあるといわれている願いが叶うお宝に向かってこう叫ぶの。[p]
+私の肌年齢をマイナス5歳にしろー！ってね！[p]
+
+#カーラ
+言いたいことは何となく分かるけど微妙に文章が成り立ってないよシャルちゃん。[p]
+それにその場のノリと勢いで行動するのやめてって前から言ってるでしょ？[p]
+
+#シャルロット
+う、え、えーとモンスターの気配があっちからするわ！行きましょう！[p]
+
+#カーラ
+そうやって自分に都合が悪くなったら勢いでごまかそうとするのも悪い癖だと思うよ。[p]
+=======
 @call file=wide/libs/utils
 [bg_new name="background" storage="room"]
 [bg_show name="background"]
@@ -297,3 +350,4 @@ BGMや効果音の設定を教えてあげる[p]
 
 
 
+>>>>>>> aa700125df31ba2e5db9985f480996b9645dcc88
