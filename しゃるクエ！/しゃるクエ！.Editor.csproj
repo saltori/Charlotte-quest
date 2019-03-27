@@ -257,21 +257,6 @@
       <HintPath>Assets/Plugins/JOKER/NCalc.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
-<<<<<<< HEAD
-      <HintPath>C:/Users/1701309/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@1.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Users/1701309/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Analytics">
-      <HintPath>C:/Users/1701309/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/Editor/UnityEditor.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>C:/Users/1701309/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Purchasing">
-      <HintPath>C:/Users/1701309/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/Editor/UnityEditor.Purchasing.dll</HintPath>
-=======
       <HintPath>C:/Users/1701322/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@1.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
@@ -285,7 +270,6 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>C:/Users/1701322/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/Editor/UnityEditor.Purchasing.dll</HintPath>
->>>>>>> aa700125df31ba2e5db9985f480996b9645dcc88
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -306,10 +290,7 @@
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\scene1.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\system.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\title.txt" />
-<<<<<<< HEAD
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\before vsTurner.txt" />
-=======
->>>>>>> aa700125df31ba2e5db9985f480996b9645dcc88
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\libs\menu.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\libs\save.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\libs\utils.txt" />
