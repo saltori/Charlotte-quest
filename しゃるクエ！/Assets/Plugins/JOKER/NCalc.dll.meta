@@ -1,6 +1,7 @@
 fileFormatVersion: 2
 guid: d904583dc00554442b9b13203b38d44a
 PluginImporter:
+<<<<<<< HEAD
   serializedVersion: 1
   iconMap: {}
   executionOrder: {}
@@ -9,6 +10,34 @@ PluginImporter:
     Any:
       enabled: 1
       settings: {}
+=======
+  externalObjects: {}
+  serializedVersion: 2
+  iconMap: {}
+  executionOrder: {}
+  defineConstraints: []
+  isPreloaded: 0
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  platformData:
+  - first:
+      Any: 
+    second:
+      enabled: 1
+      settings: {}
+  - first:
+      Editor: Editor
+    second:
+      enabled: 0
+      settings:
+        DefaultValueInitialized: true
+  - first:
+      Windows Store Apps: WindowsStoreApps
+    second:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
+>>>>>>> aa700125df31ba2e5db9985f480996b9645dcc88
   userData: 
   assetBundleName: 
   assetBundleVariant: 
