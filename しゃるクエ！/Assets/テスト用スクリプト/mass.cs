@@ -8,6 +8,8 @@ public class mass : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Mass = GetComponent<SpriteRenderer>();
+        posx = Mass.transform.position.x;
+        posy = Mass.transform.position.y;
         
 	}
 	
@@ -18,6 +20,8 @@ public class mass : MonoBehaviour {
     public void Push()
     {
         mapChar.posx = posx;
-        mapChar.posy = posy;
+        mapChar.posy = posy + 1.4f;
+
+        Debug.Log("押せてる");
     }
 }
