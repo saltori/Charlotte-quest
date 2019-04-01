@@ -14,8 +14,6 @@ using System.Text;
 namespace Novel
 {
 
-<<<<<<< HEAD
-
 	//ゲーム全体に関する情報を保持する
 	[Serializable]
 	public class SaveGlobalObject{
@@ -288,8 +286,6 @@ namespace Novel
 
 
 		}
-
-=======
     //ゲーム全体に関する情報を保持する
     [Serializable]
     public class SaveGlobalObject
@@ -485,15 +481,10 @@ namespace Novel
             SaveToBinaryFile(sobj, path);
 
         }
->>>>>>> dd58bbb7060b6a29aacf89211424f2de3699dc3a
-
-
-<<<<<<< HEAD
 
 	}
 
     }
-=======
             string json = LitJson.JsonMapper.ToJson(obj);
 
 
@@ -588,4 +579,3 @@ namespace Novel
         }
     }
 }
->>>>>>> dd58bbb7060b6a29aacf89211424f2de3699dc3a
