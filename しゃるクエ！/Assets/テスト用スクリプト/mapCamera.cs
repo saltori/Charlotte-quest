@@ -9,15 +9,18 @@ public class mapCamera : MonoBehaviour
     private Vector2 scrollStartPos = new Vector2(); // スクロールの起点となるタッチポジション
     private static float SCROLL_END_LEFT = -15f; // 左側への移動制限(これ以上左には進まない)
     private static float SCROLL_END_RIGHT = 15f; // 右側への移動制限(これ以上右には進まない)
-    private static float SCROLL_DISTANCE_CORRECTION = 0.8f; // スクロール距離の調整
+    private static float SCROLL_DISTANCE_CORRECTION = 0.5f; // スクロール距離の調整
 
     private Vector2 touchPosition = new Vector2(); // タッチポジション初期化
     private Collider2D collide2dObj = null; // タッチ位置にあるオブジェクトの初期化
+    private Vector3 pos;
+
+    private Vector3 initPosition = new Vector3(SCROLL_END_LEFT, 0, -10);
 
     // Use this for initialization
     void Start()
     {
-
+        pos = this.transform.position = initPosition;
     }
 
     // Update is called once per frame
@@ -53,10 +56,10 @@ public class mapCamera : MonoBehaviour
                         // 直前のタッチ位置との差を取得する
                         float diffPos = SCROLL_DISTANCE_CORRECTION * (touchMovePos.x - scrollStartPos.x);
 
-                        Vector2 pos = this.transform.position;
+                        pos.z = -10;
                         pos.x -= diffPos;
                         // スクロールが制限を超過する場合、処理を止める
-                        if (pos.x > SCROLL_END_RIGHT || pos.x < SCROLL_END_LEFT)
+                        if (pos.x >= SCROLL_END_RIGHT || pos.x <= SCROLL_END_LEFT)
                         {
                             return;
                         }

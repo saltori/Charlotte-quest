@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class homeButton : MonoBehaviour {
+public class menuButton : MonoBehaviour {
 
     public bool actFlag;
     public bool flag;

@@ -290,7 +290,9 @@
     <Compile Include="Assets\スクリプト\Battle\CommandMenu\ITEMListInvisible.cs" />
     <Compile Include="Assets\スクリプト\Battle\SelectList.cs" />
     <Compile Include="Assets\スクリプト\changeImage.cs" />
+    <Compile Include="Assets\スクリプト\homeButton.cs" />
     <Compile Include="Assets\スクリプト\invisible.cs" />
+    <Compile Include="Assets\スクリプト\mapButton.cs" />
     <Compile Include="Assets\スクリプト\menu.cs" />
     <Compile Include="Assets\スクリプト\menuButton.cs" />
     <Compile Include="Assets\スクリプト\move.cs" />
