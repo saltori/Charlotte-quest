@@ -21,7 +21,5 @@ public class mass : MonoBehaviour {
     {
         mapChar.posx = posx;
         mapChar.posy = posy + 1.4f;
-
-        Debug.Log("押せてる");
     }
 }
