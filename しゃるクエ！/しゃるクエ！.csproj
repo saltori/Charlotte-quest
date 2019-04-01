@@ -298,15 +298,11 @@
     <Compile Include="Assets\スクリプト\Scene.cs" />
     <Compile Include="Assets\スクリプト\title.cs" />
     <Compile Include="Assets\スクリプト\titleLogo.cs" />
-    <Compile Include="Assets\テスト用スクリプト\battleMass.cs" />
-    <Compile Include="Assets\テスト用スクリプト\bossMass.cs" />
     <Compile Include="Assets\テスト用スクリプト\home.cs" />
     <Compile Include="Assets\テスト用スクリプト\map.cs" />
-    <Compile Include="Assets\テスト用スクリプト\mapCamera.cs" />
     <Compile Include="Assets\テスト用スクリプト\mapChar.cs" />
     <Compile Include="Assets\テスト用スクリプト\mass.cs" />
     <Compile Include="Assets\テスト用スクリプト\SEtest.cs" />
-    <Compile Include="Assets\テスト用スクリプト\talkMass.cs" />
     <Compile Include="Assets\テスト用スクリプト\textManager.cs" />
     <Compile Include="Assets\テスト用スクリプト\textTest.cs" />
     <Compile Include="Assets\マネージャー系\AudioManager.cs" />
