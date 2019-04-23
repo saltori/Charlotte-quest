@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class commandMenu : MonoBehaviour
 {
 
-    public bool actFlag/* = true*/;
+    public bool actFlag;
     public static bool flag;
 
     // Use this for initialization
