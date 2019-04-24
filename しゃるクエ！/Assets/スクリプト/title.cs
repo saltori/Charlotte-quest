@@ -15,13 +15,11 @@ public class title : MonoBehaviour {
     void Start () {
         FlashingCnt = 0;
         image = GetComponent<Image>();
-        Debug.Log("start通過");
 	}
 	
 	// Update is called once per frame
 	void Update () {
         FlashingCnt++;
-        Debug.Log("update稼働中");
         if (FlashingCnt / 30 % 2 == 0)
         {
             image.color = color1;
