@@ -8,8 +8,6 @@ public class home : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        AudioManager.Instance.StopBGM();
-        AudioManager.Instance.PlayBGM("ゲームオーバー3");
     }
 
     // Update is called once per frame

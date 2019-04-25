@@ -12,7 +12,7 @@ public class menu : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        actFlag = true;
+        actFlag = false;
         flag = true;
     }
 
